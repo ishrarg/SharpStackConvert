@@ -8,6 +8,15 @@
     <Title>SharpConvert for TypeConversions</Title>
     <Authors>SharpStack Technologies</Authors>
     <PackageId>SharpStackConvert</PackageId>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="LICENSE" />
+  </ItemGroup>
+
+ 
+  <ItemGroup>
+    <None Include="LICENSE" Pack="true" PackagePath=""/>
+  </ItemGroup>
 </Project>
