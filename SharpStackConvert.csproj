@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>SharpConvert for TypeConversions</Title>
+    <Authors>SharpStack Technologies</Authors>
+    <PackageId>SharpStackConvert</PackageId>
+  </PropertyGroup>
+
+</Project>

@@ -1,4 +1,4 @@
-﻿namespace SharpConvert
+﻿namespace SharpStackConvert
 {
     public static class TypeConverter
     {
