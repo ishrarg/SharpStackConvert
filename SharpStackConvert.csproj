@@ -11,6 +11,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Version>1.0.0.1</Version>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <Description>SharpStack Convert is an another Extension library that is helpful when you are lazy converting objects into types. It provides you extension methods that comes after all object types.</Description>
   </PropertyGroup>
 
   <ItemGroup>
