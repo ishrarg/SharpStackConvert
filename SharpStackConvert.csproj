@@ -5,13 +5,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>SharpConvert for TypeConversions</Title>
+    <Title>SharpStack Convert - Convert anything to anything</Title>
     <Authors>SharpStack Technologies</Authors>
     <PackageId>SharpStackConvert</PackageId>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>1.0.0.1</Version>
+    <Version>1.0.0.2</Version>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
-    <Description>SharpStack Convert is an another Extension library that is helpful when you are lazy converting objects into types. It provides you extension methods that comes after all object types.</Description>
+    <Description>The SharpStackConvert NuGet package is a powerful utility library simplifying data conversion tasks for developers. Offering a wide range of extension methods and static class functionalities, it covers Base64 encoding/decoding, CSV handling, HTML content conversion, and hash value generation (MD5, SHA1, SHA256, SHA384, SHA512). Additionally, it provides methods for numeric, date/time conversions, and JSON serialization/deserialization. Streamline your development process with this versatile package for efficient and reliable data conversions in various scenarios.</Description>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageReleaseNotes>This release introduces a host of new classes that significantly enhance the functionality of the package, making data conversion tasks even more streamlined and versatile. The newly added classes include CSVConverter, DataTableConverter, HashConverter, HTMLConverter, and JsonConverter. These classes bring a wealth of methods to handle CSV data, convert between DataTables and various string representations, generate hash values, convert HTML content, and facilitate JSON serialization and deserialization. We believe these additions will empower developers with powerful tools to tackle a broader range of data conversion challenges. Upgrade to the latest version now and explore the enhanced capabilities of SharpStackConvert!</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/ishrarg/SharpStackConvert</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +24,11 @@
  
   <ItemGroup>
     <None Include="LICENSE" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+ 
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
  
