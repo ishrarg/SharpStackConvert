@@ -100,7 +100,7 @@ Static class offering JSON serialization and deserialization methods.
 
 ## Contributing
 
-Feel free to contribute to the development of this NuGet package. Submit issues or pull requests on the [GitHub repository](https://github.com/your/repo).
+Feel free to contribute to the development of this NuGet package. Submit issues or pull requests on the [GitHub repository](https://github.com/ishrarg/SharpStackConvert).
 
 ## License
 
