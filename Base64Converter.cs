@@ -73,7 +73,7 @@ namespace SharpStackConvert
         /// </summary>
         /// <param name="bitmap">The bitmap image to convert.</param>
         /// <returns>The base64 string representation of the image.</returns>
-        public static string ImageToBase64(System.Drawing.Bitmap bitmap)
+        public static string ImageToBase64(this System.Drawing.Bitmap bitmap)
         {
             if (bitmap != null)
             {
