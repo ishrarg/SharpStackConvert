@@ -17,6 +17,8 @@ namespace SharpStackConvert
         /// <returns>A string in CSV format.</returns>
         public static string ToCSVFormat(this List<string[]> rows, string Splitter = ",")
         {
+            if(rows == null)return "";
+
             string returnValue = "";
             if (rows != null && rows.Count > 0)
             {
@@ -47,6 +49,8 @@ namespace SharpStackConvert
         /// <returns>A string in CSV format.</returns>
         public static string ToCSVFormat(this string[,] rows, string Splitter = ",")
         {
+            if(rows == null)return "";
+
             string returnValue = "";
             if (rows != null && rows.Length > 0)
             {
@@ -77,6 +81,8 @@ namespace SharpStackConvert
         /// <returns>A string in CSV format.</returns>
         public static string ToCSVFormat(this string[][] rows, string Splitter = ",")
         {
+            if(rows == null)return "";
+             
             string returnValue = "";
             if (rows != null && rows.Length > 0)
             {
@@ -98,12 +104,7 @@ namespace SharpStackConvert
         }
 
 
-        //This is an extension method for the string class that splits a string into a list of lines.The method takes two parameters:1. "input" - the string to be split into lines.
-        //2. "SkipEmptyLines" - a boolean flag indicating whether empty lines should be skipped or included in the resulting list.
-        //The method first creates an empty list called "Lines" to store the lines. If the input string is null or empty, it returns the empty list.
-        //If the input string is not null or empty, the method determines the splitting options based on the value of "SkipEmptyLines". If "SkipEmptyLines" is true, it sets the splitting option to "RemoveEmptyEntries", which removes any empty lines from the resulting array. If "SkipEmptyLines" is false, it sets the splitting option to "None", which includes empty lines in the resulting array.
-        //The method then creates a character array containing the line separators "\r\n". It uses this array to split the input string into an array of lines using the "Split" method, passing in the splitting options.
-        //Finally, the method adds all the lines from the resulting array to the "Lines" list using the "AddRange" method, and returns the list.
+
 
         /// <summary>
         /// Splits a string into a list of lines, with the option to skip empty lines.
