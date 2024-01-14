@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace SharpStackConvert
@@ -214,6 +215,184 @@ namespace SharpStackConvert
             }
             return dt;
         }
+
+
+        /// <summary>
+        /// Converts a DataTable to an HTML table.
+        /// </summary>
+        /// <param name="tbl">The DataTable to convert.</param>
+        /// <returns>The HTML representation of the DataTable as a table.</returns>
+        public static string ToHTMLTable(this DataTable tbl)
+        {
+            string tableTagStyle = "border: solid 1px Silver; font-size: x-small;";
+            string tableBorder = "1px";
+            StringBuilder sb = new StringBuilder();
+            int cellPadding = 5;
+            int cellSpacing = 0;
+            string headerTextAlign = "left";
+            string headerTextVAlign = "top";
+            string tdAlign = "left";
+            string tdVAlign = "top";
+
+            sb.Append($"<table border='{tableBorder}' cellpadding='{cellPadding}' cellspacing='{cellSpacing}' ");
+
+            sb.Append($"style='{tableTagStyle}'>");
+
+
+            sb.Append("<tr align='left' valign='top'>");
+            foreach (DataColumn col in tbl.Columns)
+            {
+                sb.Append($"<td align='{headerTextAlign}' valign='{headerTextVAlign}'><b>");
+                sb.Append(col.ColumnName);
+                sb.Append("</b></td>");
+            }
+            sb.Append("</tr>");
+
+
+            foreach (DataRow row in tbl.Rows)
+            {
+                sb.Append($"<tr align='{tdAlign}' valign='{tdVAlign}'>");
+                foreach (DataColumn col in tbl.Columns)
+                {
+                    sb.Append($"<td align='{tdAlign}' valign='{tdVAlign}'>");
+                    sb.Append(row[col.ColumnName].ToSString());
+                    sb.Append("</td>");
+                }
+                sb.Append("</tr>");
+            }
+
+            sb.Append("</table>");
+            return sb.ToString();
+        }
+
+
+
+
+        /// <summary>
+        /// Converts a DataTable to a Dictionary that contains key-value pairs from the DataTable based on the specified key and value columns.
+        /// </summary>
+        /// <param name="dt">The DataTable to convert.</param>
+        /// <param name="keyColumn">The name of the key column.</param>
+        /// <param name="valueColumn">The name of the value column.</param>
+        /// <returns>A Dictionary with key-value pairs from the DataTable.</returns>
+        public static Dictionary<string, string> DataTableToDict(this DataTable dt, string keyColumn, string valueColumn)
+        {
+            if (dt is null) return null;
+            if (dt.Columns.IndexOf(keyColumn) < 0) return null;
+            if (dt.Columns.IndexOf(valueColumn) < 0) return null;
+
+
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            foreach (DataRow row in dt.Rows)
+            {
+                if (dict.ContainsKey(row[keyColumn].ToString()))
+                    continue;
+
+                dict.Add(row[keyColumn].ToString(), row[valueColumn].ToString());
+            }
+            return dict;
+        }
+
+        /// <summary>
+        /// Converts a dictionary to a DataTable.
+        /// </summary>
+        /// <param name="dict">The dictionary to convert.</param>
+        /// <param name="keyColumn">The name of the key column in the DataTable.</param>
+        /// <param name="valueColumn">The name of the value column in the DataTable.</param>
+        /// <param name="tableName">The name of the DataTable.</param>
+        /// <returns>The converted DataTable.</returns>
+        public static DataTable DictionaryToDatatable(this Dictionary<string, string> dict, string keyColumn, string valueColumn, string tableName = "Tbl")
+        {
+
+            if (dict is null) return null;
+            if (dict.Count == 0) return null;
+
+            DataTable dt = new DataTable(tableName);
+            dt.Columns.Add(keyColumn);
+            dt.Columns.Add(valueColumn);
+
+            foreach (KeyValuePair<string, string> kvp in dict)
+            {
+                dt.Rows.Add(kvp.Key, kvp.Value);
+            }
+            return dt;
+        }
+
+
+
+
+        /// <summary>
+        /// Converts a DataTable to XML string.
+        /// </summary>
+        /// <param name="tbl">The DataTable to convert.</param>
+        /// <returns>The XML string representation of the DataTable.</returns>
+        public static string DataTableToXML(this DataTable tbl)
+        {
+
+            if (tbl is null) return null;
+            if (tbl.Rows.Count == 0) return null;
+
+            System.IO.StringWriter writer = new System.IO.StringWriter();
+            tbl.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+            return writer.ToString();
+        }
+
+        /// <summary>
+        /// Converts an XML string to a DataTable.
+        /// </summary>
+        /// <param name="xml">The XML string to convert.</param>
+        /// <returns>The converted DataTable.</returns>
+        public static DataTable XMLToDataTable(this string xml)
+        {
+            if (xml is null) return null;
+            if (xml.Length == 0) return null;
+
+            System.IO.StringReader reader = new System.IO.StringReader(xml);
+            DataTable dt = new DataTable();
+            dt.ReadXml(reader);
+            return dt;
+        }
+
+        /// <summary>
+        /// Converts a DataTable to a JSON string.
+        /// </summary>
+        /// <param name="tbl">The DataTable to convert.</param>
+        /// <returns>A JSON string representing the DataTable.</returns>
+        public static string DataTableToJSON(this DataTable tbl)
+        {
+            if (tbl is null) return "";
+            StringBuilder jsonResult = new StringBuilder();
+
+            jsonResult.Append("[\n");
+
+            for (int i = 0; i < tbl.Rows.Count; i++)
+            {
+                jsonResult.Append("{");
+
+                for (int j = 0; j < tbl.Columns.Count; j++)
+                {
+                    jsonResult.Append($"\"{tbl.Columns[j].ColumnName}\": \"{tbl.Rows[i][j]}\"");
+
+                    if (j < tbl.Columns.Count - 1)
+                        jsonResult.Append(", ");
+                }
+
+                jsonResult.Append("}");
+
+                if (i < tbl.Rows.Count - 1)
+                    jsonResult.Append(", ");
+
+                jsonResult.Append("\n");
+            }
+
+            jsonResult.Append("]");
+
+            return jsonResult.ToString();
+
+        }
+
+
+
 
 
     }
