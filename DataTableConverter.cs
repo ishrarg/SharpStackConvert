@@ -7,15 +7,21 @@ using System.Threading.Tasks;
 
 namespace SharpStackConvert
 {
+    /// <summary>
+    /// A static class that provides methods for converting DataTable objects to other data structures.
+    /// </summary>
     public static class DataTableConverter
     {
+
+
         /// <summary>
-        /// Converts a jagged array of strings into a DataTable.
+        /// Converts a two-dimensional string array into a DataTable.
         /// </summary>
-        /// <param name="rows">The jagged array of strings to convert.</param>
-        /// <returns>A DataTable containing the converted data.</returns>
+        /// <param name="rows">The two-dimensional string array to convert.</param>
+        /// <returns>A DataTable containing the data from the string array.</returns>
         public static DataTable ToTable(this string[][] rows)
         {
+            if (rows == null) return null;
             DataTable dt = new DataTable("Tbl");
 
             if (rows.Length > 0)
@@ -33,6 +39,7 @@ namespace SharpStackConvert
             return dt;
         }
 
+
         /// <summary>
         /// Converts a two-dimensional string array to a DataTable.
         /// </summary>
@@ -40,6 +47,7 @@ namespace SharpStackConvert
         /// <returns>A DataTable containing the data from the two-dimensional string array.</returns>
         public static DataTable ToTable(this string[,] rows)
         {
+            if (rows == null) return null;
             DataTable dt = new DataTable("Tbl");
 
             if (rows.Length > 0)
@@ -69,6 +77,7 @@ namespace SharpStackConvert
         /// <returns>A DataTable containing the converted data.</returns>
         public static DataTable ToTable(this string[] rows)
         {
+            if (rows == null) return null;
             DataTable dt = new DataTable("Tbl");
 
             if (rows.Length > 0)
@@ -91,6 +100,7 @@ namespace SharpStackConvert
         /// <returns>The converted DataTable.</returns>
         public static DataTable ToTable(this string[] rows, string tableName)
         {
+            if (rows == null) return null;
             DataTable dt = new DataTable(tableName);
 
             if (rows.Length > 0)
@@ -110,9 +120,10 @@ namespace SharpStackConvert
         /// </summary>
         /// <param name="rows">The two-dimensional string array to convert.</param>
         /// <param name="FirstRowIsHeader">A boolean value indicating whether the first row of the array should be treated as the header row of the DataTable.</param>
-        /// <returns>A DataTable containing the data from the string array.</returns>
+        /// <returns>A DataTable containing the data from the two-dimensional string array.</returns>
         public static DataTable ToTable(this string[,] rows, bool FirstRowIsHeader)
         {
+            if (rows == null) return null;
             DataTable dt = new DataTable("Tbl");
 
             if (rows.Length > 0)
@@ -158,7 +169,7 @@ namespace SharpStackConvert
 
 
         /// <summary>
-        /// Converts a list of string arrays into a DataTable.
+        /// Converts a list of string arrays to a DataTable.
         /// </summary>
         /// <param name="rows">The list of string arrays to convert.</param>
         /// <param name="FirstRowIsHeader">Indicates whether the first row should be treated as the header row.</param>
@@ -166,6 +177,7 @@ namespace SharpStackConvert
         /// <returns>The converted DataTable.</returns>
         public static DataTable ToTable(this List<string[]> rows, bool FirstRowIsHeader = true, string tableName = "Tbl")
         {
+            if (rows == null) return null;
             DataTable dt = new DataTable(tableName);
 
             if (rows != null && rows.Count > 0)
