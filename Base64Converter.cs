@@ -73,7 +73,7 @@ namespace SharpStackConvert
         /// </summary>
         /// <param name="bitmap">The bitmap image to convert.</param>
         /// <returns>The base64 string representation of the image.</returns>
-        public static string ImageToBase64(this System.Drawing.Bitmap bitmap)
+        public static string ToBase64(this System.Drawing.Bitmap bitmap)
         {
             if (bitmap != null)
             {
@@ -91,10 +91,10 @@ namespace SharpStackConvert
         /// </summary>
         /// <param name="input">The base64 encoded string.</param>
         /// <returns>The Bitmap object.</returns>
-        public static Bitmap FromBase64ToBitmap(this string input)
+        public static Bitmap Base64ToBitmap(this string input)
         {
 
-            byte[] byteImage = FromBase64ToByteArray(input);
+            byte[] byteImage = Base64ToByteArray(input);
             if (byteImage != null)
             {
                 System.IO.MemoryStream ms = new System.IO.MemoryStream(byteImage);
@@ -150,7 +150,7 @@ namespace SharpStackConvert
         /// </summary>
         /// <param name="input">The base64 encoded string to convert.</param>
         /// <returns>The byte array representation of the base64 encoded string.</returns>
-        public static byte[] FromBase64ToByteArray(this string input)
+        public static byte[] Base64ToByteArray(this string input)
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -169,7 +169,7 @@ namespace SharpStackConvert
         /// <param name="input">The base64 encoded string to convert.</param>
         /// <param name="encoding">The encoding to use for the conversion.</param>
         /// <returns>A byte array representing the decoded base64 string.</returns>
-        public static byte[] FromBase64ToByteArray(this string input, System.Text.Encoding encoding)
+        public static byte[] Base64ToByteArray(this string input, System.Text.Encoding encoding)
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -181,7 +181,43 @@ namespace SharpStackConvert
             }
         }
 
-        //ImageToBase64
+        /// <summary>
+        /// Converts a Stream to a Base64 string.
+        /// </summary>
+        /// <param name="input">The Stream to convert.</param>
+        /// <returns>The Base64 string representation of the Stream.</returns>
+        public static string ToBase64(this Stream input)
+        {
+
+            if (input == null)
+            {
+                return "";
+            }
+            else
+            {
+                byte[] buffer = new byte[input.Length];
+                input.Read(buffer, 0, (int)input.Length);
+                return Convert.ToBase64String(buffer);
+            }
+        }
+
+        /// <summary>
+        /// Converts a base64 encoded string to a stream.
+        /// </summary>
+        /// <param name="input">The base64 encoded string.</param>
+        /// <returns>A stream containing the decoded data.</returns>
+        public static Stream Base64ToStream(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return null;
+            }
+            else
+            {
+                byte[] buffer = Convert.FromBase64String(input);
+                return new MemoryStream(buffer);
+            }
+        }
 
 
     }
